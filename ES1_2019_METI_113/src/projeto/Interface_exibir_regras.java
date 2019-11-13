@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
 public class Interface_exibir_regras {
-	
+	 
 	private JFrame frame;
 	private JLabel texto;
 	private JTextArea field;

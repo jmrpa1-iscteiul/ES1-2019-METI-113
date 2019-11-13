@@ -210,7 +210,7 @@ public class GUI{
             	matrix[iMatrix][a]=stringArray[a].toString();
             }
             iMatrix++;
-        } 
+        }  
         workbook.close();
         inputStream.close();
     	return matrix;

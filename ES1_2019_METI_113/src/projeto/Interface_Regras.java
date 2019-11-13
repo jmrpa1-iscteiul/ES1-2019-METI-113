@@ -67,7 +67,7 @@ public class Interface_Regras {
 		caixa.setEditable(false);
 		
 		frame.add(caixa, BorderLayout.CENTER);
-		
+		 
 		JComboBox<String> box_1 = new JComboBox<String>();
 		box_1.addItem("LOC");
 		box_1.addItem("CYCLO");
