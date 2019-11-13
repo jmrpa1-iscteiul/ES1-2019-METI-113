@@ -93,7 +93,7 @@ public class Interface_exibir_regras {
 		
 		frame.add(sul, BorderLayout.SOUTH);
 		
-	}
+	} 
 	
 	public JLabel getJFrame() {
 		return texto;

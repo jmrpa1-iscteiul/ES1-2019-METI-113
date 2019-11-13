@@ -164,7 +164,7 @@ public class Interface_Regras {
 		sul.add(sair);
 		
 		
-		
+		 
 		sair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
