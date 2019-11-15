@@ -7,10 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -18,6 +21,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -119,6 +123,27 @@ public class GUI{
 			
 		});	
 		
+		JButton chooseCodeFileButton = new JButton("Choose code file");
+		buttonsPanel.add(chooseCodeFileButton);
+		chooseCodeFileButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+				
+				int returnValue = jfc.showOpenDialog(null);
+				
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = jfc.getSelectedFile();
+					try {
+						readCode(selectedFile);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
 		JButton fazerRegra = new JButton("Fazer regra");
 		
 		buttonsPanel.add(fazerRegra);
@@ -166,6 +191,9 @@ public class GUI{
 		
 		JTable table = new JTable(data, columnNames);
 		secondFrame.add(table);
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		secondFrame.add(scrollPane);
 		secondFrame.setSize(1100, 400); 
 		secondFrame.setVisible(true); 		
 		
@@ -179,8 +207,9 @@ public class GUI{
         Workbook workbook = new XSSFWorkbook(inputStream);
         Sheet firstSheet = workbook.getSheetAt(0);
         Iterator<Row> iterator = firstSheet.iterator();
-        
-        while (iterator.hasNext()) {
+        int i=0;
+        while (iterator.hasNext() && i<50) {
+        	i++;
         	String [] stringArray = new String [12];
             int iArray=0;
             Row nextRow = iterator.next();
@@ -215,7 +244,26 @@ public class GUI{
         inputStream.close();
     	return matrix;
 	}
-	
+	public void readCode(File selectedFile) throws FileNotFoundException {
+		Scanner scanner = new Scanner(selectedFile);
+		
+		//Number of atributes in the given class
+        System.out.println("Number of atributes: " +selectedFile.getClass());
+        Field[] atributos = selectedFile.getClass().getDeclaredFields();
+        for(Field f: atributos) {
+        	System.out.println(f.getName());
+        }
+	   
+        int lineNum = 0;
+	    while (scanner.hasNextLine()) {
+	        String line = scanner.nextLine();
+	        //Number of lines per method
+	        if(line.contains("public") || line.contains("private") && line.contains("{")) {
+	        	lineNum++;	        	
+	        }
+	    }
+	    System.out.println("Number of methods: " + lineNum);
+	}
 	public ArrayList <String> getArray(){
 		return array;
 	}
