@@ -7,10 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -119,6 +122,27 @@ public class GUI{
 			
 		});	
 		
+		JButton chooseCodeFileButton = new JButton("Choose code file");
+		buttonsPanel.add(chooseCodeFileButton);
+		chooseCodeFileButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+				
+				int returnValue = jfc.showOpenDialog(null);
+				
+				if (returnValue == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = jfc.getSelectedFile();
+					try {
+						readCode(selectedFile);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
 		JButton fazerRegra = new JButton("Fazer regra");
 		
 		buttonsPanel.add(fazerRegra);
@@ -218,6 +242,27 @@ public class GUI{
 	
 	public ArrayList <String> getArray(){
 		return array;
+	}
+	
+	public void readCode(File selectedFile) throws FileNotFoundException {
+		Scanner scanner = new Scanner(selectedFile);
+		
+		//Number of atributes in the given class
+        System.out.println("Number of atributes: " +selectedFile.getClass());
+        Field[] atributos = selectedFile.getClass().getDeclaredFields();
+        for(Field f: atributos) {
+        	System.out.println(f.getName());
+        }
+	   
+        int lineNum = 0;
+	    while (scanner.hasNextLine()) {
+	        String line = scanner.nextLine();
+	        //Number of lines per method
+	        if(line.contains("public") || line.contains("private") && line.contains("{")) {
+	        	lineNum++;	        	
+	        }
+	    }
+	    System.out.println("Number of methods: " + lineNum);
 	}
 	
 
