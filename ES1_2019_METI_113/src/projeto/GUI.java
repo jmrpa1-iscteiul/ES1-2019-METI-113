@@ -210,6 +210,14 @@ public class GUI{
 	//	Regra regra_is_feature_envy = guiRegras.getIs_feature_envy();
 		
 		while(rows<10) { // trocar por rows<table.getRowCount()!!!!
+
+		HashMap<String,Integer> values=guiRegras.getHashValues();
+		HashMap<String,String> thresholds=guiRegras.getHashThreshold();
+		System.out.println(thresholds.size());
+		String metrica1=values.keySet().stream().findFirst().get();
+		System.out.println("Regra introduzida pelo utilizador: " + metrica1 + thresholds.get(metrica1) + values.get(metrica1));
+		while(rows<table.getRowCount()) { // trocar por rows<table.getRowCount()!!!!
+
 			String s = table.getValueAt(rows, 4).toString();
 			
 			String [] s1 =s.split("\\.");
@@ -307,14 +315,14 @@ public class GUI{
 	}
 	
 	public String[][] readExcel(String excelFilePath) throws IOException {
-    	String[][] matrix = new String[50][12];
+    	String[][] matrix = new String[421][12];
     	int iMatrix=0; 
     	FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
         Workbook workbook = new XSSFWorkbook(inputStream);
         Sheet firstSheet = workbook.getSheetAt(0);
         Iterator<Row> iterator = firstSheet.iterator();
         int i=0;
-        while (iterator.hasNext() && i<25) {
+        while (iterator.hasNext() && i<421) {
         	i++;
         	String [] stringArray = new String [12];
             int iArray=0;
