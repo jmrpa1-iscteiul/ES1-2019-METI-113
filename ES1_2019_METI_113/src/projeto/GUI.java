@@ -163,7 +163,7 @@ public class GUI{
 		System.out.println(thresholds.size());
 		String metrica1=values.keySet().stream().findFirst().get();
 		System.out.println("Regra introduzida pelo utilizador: " + metrica1 + thresholds.get(metrica1) + values.get(metrica1));
-		while(rows<25) { // trocar por rows<table.getRowCount()!!!!
+		while(rows<table.getRowCount()) { // trocar por rows<table.getRowCount()!!!!
 			String s = table.getValueAt(rows, 4).toString();
 			
 			String [] s1 =s.split("\\.");
@@ -217,7 +217,7 @@ public class GUI{
 	}
 	
 	public String[][] readExcel(String excelFilePath) throws IOException {
-    	String[][] matrix = new String[50][12];
+    	String[][] matrix = new String[421][12];
     	int iMatrix=0; 
     	FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
         System.out.println(excelFilePath);
@@ -225,7 +225,7 @@ public class GUI{
         Sheet firstSheet = workbook.getSheetAt(0);
         Iterator<Row> iterator = firstSheet.iterator();
         int i=0;
-        while (iterator.hasNext() && i<25) {
+        while (iterator.hasNext() && i<421) {
         	i++;
         	String [] stringArray = new String [12];
             int iArray=0;
