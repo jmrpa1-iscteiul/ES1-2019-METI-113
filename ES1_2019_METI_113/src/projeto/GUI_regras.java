@@ -12,16 +12,19 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.text.NumberFormatter;
 
 public class GUI_regras {
 	
 	private JFrame frame;
-	private JPanel metricsPanel;
-	private JComboBox<String> box_defeito1, box_Metric_1, box_Threshold_1, box_Operator, box_Metric_2, box_Threshold_2;
-	private JFormattedTextField metric_1_value, metric_2_value;
+	private JPanel metricsPanel, metricsPanel2;
+	private JComboBox<String> box_operador_1, box_operador_2;
+	private JTextField caixa1, caixa2, caixa3, caixa4, caixa5, caixa6, caixa7, caixa8, caixa9, caixa10;
+	private JFormattedTextField metric_1_value, metric_2_value, metric_3_value, metric_4_value;
 	private int loc, cyclo, atfd, laa;
 	private HashMap<String,Integer> hashValues = new HashMap<String,Integer>();
 	private HashMap<String,String> hashThreshold = new HashMap<String,String>();
@@ -40,9 +43,7 @@ public class GUI_regras {
 
 	
 	private void addContent() {
-		metricsPanel = new JPanel();
-		metricsPanel.setLayout(new GridLayout(1,8));
-		frame.add(metricsPanel, BorderLayout.NORTH);
+		
 		
 		addIsLongMethodFields();
 		
@@ -51,7 +52,7 @@ public class GUI_regras {
 		
 		criarRegra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getRegra();								
+			//	getRegra();	
 			}
 		});	
 
@@ -64,52 +65,83 @@ public class GUI_regras {
 		numberFormatter.setAllowsInvalid(false); //this is the key!!
 		numberFormatter.setMaximum(100);
 
-		box_defeito1 = new JComboBox<String>();
-		box_defeito1.addItem("is_long_method");
-		box_defeito1.addItem("is_envy_method");
-		box_defeito1.setSelectedItem(null);
-		metricsPanel.add(box_defeito1);
+		metricsPanel = new JPanel();
+		metricsPanel.setLayout(new GridLayout(2,8));
+		
+		//metricsPanel2 = new JPanel();
+		//metricsPanel2.setLayout(new GridLayout(1,8));
+		frame.add(metricsPanel, BorderLayout.NORTH);
+		//frame.add(label2, BorderLayout.CENTER);
+		
+		caixa9 = new JTextField("is long method");
+		caixa9.setEditable(false);
+		metricsPanel.add(caixa9);
+		
+		caixa1 = new JTextField("LOC");
+		caixa1.setEditable(false);
+		metricsPanel.add(caixa1);
+		
+		caixa2 = new JTextField(">");
+		caixa2.setEditable(false);
+		metricsPanel.add(caixa2);
+		
+		JFormattedTextField box_loc_value = new JFormattedTextField(numberFormatter); 
+		metricsPanel.add(box_loc_value);
+		//loc=Integer.parseInt(metric_1_value.getText());
+				
+		box_operador_1 = new JComboBox<String>();
+		box_operador_1.addItem("&&");
+		box_operador_1.addItem("||");
+		box_operador_1.setSelectedItem(null);
+		metricsPanel.add(box_operador_1);
 
-		box_Metric_1 = new JComboBox<String>();
-		box_Metric_1.addItem("LOC");
-		box_Metric_1.addItem("CYCLO");
-		box_Metric_1.addItem("ATFD");
-		box_Metric_1.addItem("LAA");
-		box_Metric_1.setSelectedItem(null);
-		metricsPanel.add(box_Metric_1);
+		caixa3 = new JTextField("CYCLO");
+		caixa3.setEditable(false);
+		metricsPanel.add(caixa3);
 		
-		box_Threshold_1 = new JComboBox<String>();
-		box_Threshold_1.addItem("<");
-		box_Threshold_1.addItem(">");
-		box_Threshold_1.setSelectedItem(null);
-		metricsPanel.add(box_Threshold_1);
+		caixa4 = new JTextField(">");
+		caixa4.setEditable(false);
+		metricsPanel.add(caixa4);
 		
-		metric_1_value = new JFormattedTextField(numberFormatter); metricsPanel.add(metric_1_value);
+		metric_2_value = new JFormattedTextField(numberFormatter); 
+		metricsPanel.add(metric_2_value);
 		
-		box_Operator = new JComboBox<String>();
-		box_Operator.addItem("&&");
-		box_Operator.setSelectedItem(null);
-		metricsPanel.add(box_Operator);
+		caixa10 = new JTextField("is feature envy");
+		caixa10.setEditable(false);
+		metricsPanel.add(caixa10);
 		
-		box_Metric_2 = new JComboBox<String>();
-		box_Metric_2.addItem("LOC");
-		box_Metric_2.addItem("CYCLO");
-		box_Metric_2.addItem("ATFD");
-		box_Metric_2.addItem("LAA");
-		box_Metric_2.setSelectedItem(null);		
-		metricsPanel.add(box_Metric_2);
+		caixa5 = new JTextField("ATFD");
+		caixa5.setEditable(false);
+		metricsPanel.add(caixa5);
 		
-		box_Threshold_2 = new JComboBox<String>();
-		box_Threshold_2.addItem("<");
-		box_Threshold_2.addItem(">");
-		box_Threshold_2.setSelectedItem(null);
-		metricsPanel.add(box_Threshold_2);
+		caixa6 = new JTextField(">");
+		caixa6.setEditable(false);
+		metricsPanel.add(caixa6);
 		
-		metric_2_value = new JFormattedTextField(numberFormatter); metricsPanel.add(metric_2_value);
+		
+		metric_3_value = new JFormattedTextField(numberFormatter); 
+		metricsPanel.add(metric_3_value);
+		
+		box_operador_2 = new JComboBox<String>();
+		box_operador_2.addItem("&&");
+		box_operador_2.addItem("||");
+		box_operador_2.setSelectedItem(null);
+		metricsPanel.add(box_operador_2);
+
+		caixa7 = new JTextField("LAA");
+		caixa7.setEditable(false);
+		metricsPanel.add(caixa7);
+		
+		caixa8 = new JTextField("<");
+		caixa8.setEditable(false);
+		metricsPanel.add(caixa8);
+		
+		metric_4_value = new JFormattedTextField(numberFormatter); 
+		metricsPanel.add(metric_4_value);
 
 	}
 	
-	private void getRegra() {
+	/*private void getRegra() {
 		
 		switch(box_Metric_1.getSelectedIndex()) {
 			case 0://LOC
@@ -159,7 +191,7 @@ public class GUI_regras {
 		}	
 		
 	
-	}
+	}*/
 	
 	
 	
@@ -171,9 +203,9 @@ public class GUI_regras {
 		return hashThreshold;
 	}
 
-	public static void main(String[] args) throws IOException {
-		GUI_regras gui = new GUI_regras();
-	}
+//	public static void main(String[] args) throws IOException {
+	//	GUI_regras gui = new GUI_regras();
+	//}
 
 	
 }
