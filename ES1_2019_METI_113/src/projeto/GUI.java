@@ -2,31 +2,25 @@ package projeto;
 
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileSystemView;
-import javax.swing.text.NumberFormatter;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -41,36 +35,34 @@ public class GUI{
 	private JFrame secondFrame;
 	private String[] columnNames = { "MethodID", "Package", "Class", "Method", "LOC", "CYCLO", "ATFD", "LAA", "is_long_method", "iPlasma", "PMD", "is_feature_envy" }; 
 	private String[][] data;
-	private int LOCvalue, CYCLOvalue, ATFDvalue, LAAvalue;
+	private int LOCvalue, CYCLOvalue, ATFDvalue, LAAvalue, iPlasmaErrors, PMDErrors;
 	private JFormattedTextField  fieldLOC, fieldCYCLO, fieldATFD, fieldLAA;
 	private ArrayList<String>array = new ArrayList<String>();
-	
+	private JTable table;
+	private GUI_regras guiRegras;
 	public GUI() {
 		
 		firstFrame = new JFrame();
 		firstFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		firstFrame.setLayout(new BorderLayout());
-		firstFrame.pack();
-		firstFrame.setSize(400, 300); 
-	    firstFrame.setVisible(true); 
-		//contentFirstFrame();
+		
+		contentFirstFrame();
+		
 	}
 	
 	public void open() {
-		contentFirstFrame();
+		firstFrame.pack();
+		firstFrame.setSize(400, 300); 
+	    firstFrame.setVisible(true); 
+
 	}
-	
-	//sfse
-	//ola sdsdf asdasds
-	
+
 	private void contentFirstFrame() {
 		firstFrame = new JFrame();
 		firstFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		firstFrame.setLayout(new BorderLayout());
 		firstFrame.pack();
-		
-		addContentMetricsPanel();
-		
+				
 		addContentButtonsPanel();
 				
 		firstFrame.setSize(400, 300); 
@@ -98,12 +90,7 @@ public class GUI{
 					try {
 						data = readExcel(selectedFile.getAbsolutePath());
 						fileNameArea.setText(selectedFile.getAbsolutePath());
-						LAAvalue = Integer.parseInt(fieldLAA.getText());
-						ATFDvalue = Integer.parseInt(fieldATFD.getText());
-						CYCLOvalue = Integer.parseInt(fieldCYCLO.getText());
-						LOCvalue = Integer.parseInt(fieldLOC.getText());
-						System.out.println(LOCvalue + ", "+ ", " + CYCLOvalue + ", " + ATFDvalue + ", " + LAAvalue);
-
+						
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -123,65 +110,28 @@ public class GUI{
 			
 		});	
 		
-		JButton chooseCodeFileButton = new JButton("Choose code file");
-		buttonsPanel.add(chooseCodeFileButton);
-		chooseCodeFileButton.addActionListener(new ActionListener() {
-			
-			@Override
+		
+		JButton fazerRegraButton = new JButton("Criar regra");
+		
+		buttonsPanel.add(fazerRegraButton);
+		fazerRegraButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-				
-				int returnValue = jfc.showOpenDialog(null);
-				
-				if (returnValue == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = jfc.getSelectedFile();
-					try {
-						readCode(selectedFile);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
+				guiRegras = new GUI_regras();
 			}
-		});
 		
-		JButton fazerRegra = new JButton("Fazer regra");
+		});	
 		
-		buttonsPanel.add(fazerRegra);
-		fazerRegra.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			
-			//firstFrame.setVisible(false);
-			//Interface_Regras inter = new Interface_Regras(firstFrame, LOCvalue, CYCLOvalue, ATFDvalue, LAAvalue, array);
-			Interface_Regras inter = new Interface_Regras(firstFrame, LOCvalue, CYCLOvalue, ATFDvalue, LAAvalue, array);
-			//Interface_Regras inter = new Interface_Regras(firstFrame, LOCvalue, CYCLOvalue, ATFDvalue, LAAvalue, this);
-			inter.open();
-		}
+		JButton calcularMetricasButton = new JButton("Calcular Metricas");
+
+		buttonsPanel.add(calcularMetricasButton);
+		calcularMetricasButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				calcularMetricas();
+			}
 		
-	});	
-	
+		});	
 	}
 
-	private void addContentMetricsPanel() {
-		JPanel metricsPanel = new JPanel();
-		metricsPanel.setLayout(new GridLayout(4,4));
-		firstFrame.add(metricsPanel, BorderLayout.NORTH);
-		
-		NumberFormat longFormat = NumberFormat.getIntegerInstance();
-
-		NumberFormatter numberFormatter = new NumberFormatter(longFormat);
-		numberFormatter.setAllowsInvalid(false); //this is the key!!
-		numberFormatter.setMaximum(100);
-		
-		JLabel labelLOC = new JLabel ("LOC: "); metricsPanel.add(labelLOC);
-		fieldLOC = new JFormattedTextField(numberFormatter); metricsPanel.add(fieldLOC);
-		JLabel labelCYCLO = new JLabel ("CYCLO: "); metricsPanel.add(labelCYCLO);
-		fieldCYCLO = new JFormattedTextField(numberFormatter); metricsPanel.add(fieldCYCLO);
-		JLabel labelATFD = new JLabel ("ATFD: "); metricsPanel.add(labelATFD);
-		fieldATFD = new JFormattedTextField(numberFormatter); metricsPanel.add(fieldATFD);
-		JLabel labelLAA = new JLabel ("LAA: "); metricsPanel.add(labelLAA);
-		fieldLAA = new JFormattedTextField(numberFormatter);metricsPanel.add(fieldLAA);
-		
-	}
 
 	private void contentSecondFrame() {
 		secondFrame = new JFrame();
@@ -189,13 +139,80 @@ public class GUI{
 		secondFrame.setLayout(new BorderLayout());
 		secondFrame.pack();
 		
-		JTable table = new JTable(data, columnNames);
+		this.table = new JTable(data, columnNames);
 		secondFrame.add(table);
-		
+		System.out.println(table.getValueAt(1, 1));
 		JScrollPane scrollPane = new JScrollPane(table);
 		secondFrame.add(scrollPane);
 		secondFrame.setSize(1100, 400); 
-		secondFrame.setVisible(true); 		
+		secondFrame.setVisible(true);
+
+	}
+	
+	
+	private void calcularMetricas() {
+		int rows=1;
+		int tempLOC=0;
+		int tempCYCLO=0;
+		boolean is_long_method=false;
+		boolean tempiPlasma=false, tempPMD=false;
+		iPlasmaErrors=0;PMDErrors=0;
+		
+		HashMap<String,Integer> values=guiRegras.getHashValues();
+		HashMap<String,String> thresholds=guiRegras.getHashThreshold();
+		System.out.println(thresholds.size());
+		String metrica1=values.keySet().stream().findFirst().get();
+		System.out.println("Regra introduzida pelo utilizador: " + metrica1 + thresholds.get(metrica1) + values.get(metrica1));
+		while(rows<25) { // trocar por rows<table.getRowCount()!!!!
+			String s = table.getValueAt(rows, 4).toString();
+			
+			String [] s1 =s.split("\\.");
+			tempLOC=Integer.parseInt(s1[0]);
+			
+			s = table.getValueAt(rows, 5).toString();
+			s1 =s.split("\\.");			
+			tempCYCLO=Integer.parseInt(s1[0]);
+			
+			System.out.println(tempLOC + " ," + tempCYCLO);
+			
+			if(tempLOC<3 && tempCYCLO<2) { //trocar por regra inserida pelo utilizador! este é so um exemplo
+				is_long_method=true;
+				System.out.println(table.getValueAt(rows,3));
+			}
+			
+			String iPlasmaString =(String) table.getValueAt(rows, 9);
+
+			switch(iPlasmaString) { //iplasma
+				case "false":
+					tempiPlasma=false;
+				break;
+				case "true":
+					tempiPlasma=true;
+				break;
+				
+			}
+			
+			String PMDString =(String) table.getValueAt(rows, 10);
+			switch(PMDString) { //iplasma
+				case "false":
+					tempPMD=false;
+				break;
+				case "true":
+					tempPMD=true;
+				break;
+				
+			}
+			if(!Boolean.valueOf(is_long_method).equals(Boolean.valueOf(tempiPlasma))) {
+			//	System.out.println("Is_long_method: " + Boolean.valueOf(is_long_method) + " ; " + "iPlasma value: "+ Boolean.valueOf(tempiPlasma));
+				iPlasmaErrors++;
+			}
+			if(!Boolean.valueOf(is_long_method).equals(Boolean.valueOf(tempPMD)))
+				PMDErrors++;
+			
+			
+			rows++;
+		}
+		System.out.println("iPlasmaErrors: " +iPlasmaErrors  + " ; " + "PMD errors: "+ PMDErrors);
 		
 	}
 	
@@ -203,12 +220,12 @@ public class GUI{
     	String[][] matrix = new String[50][12];
     	int iMatrix=0; 
     	FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
-         
+        System.out.println(excelFilePath);
         Workbook workbook = new XSSFWorkbook(inputStream);
         Sheet firstSheet = workbook.getSheetAt(0);
         Iterator<Row> iterator = firstSheet.iterator();
         int i=0;
-        while (iterator.hasNext() && i<50) {
+        while (iterator.hasNext() && i<25) {
         	i++;
         	String [] stringArray = new String [12];
             int iArray=0;
@@ -244,30 +261,6 @@ public class GUI{
         inputStream.close();
     	return matrix;
 	}
-	public void readCode(File selectedFile) throws FileNotFoundException {
-		Scanner scanner = new Scanner(selectedFile);
-		
-		//Number of atributes in the given class
-        System.out.println("Number of atributes: " +selectedFile.getClass());
-        Field[] atributos = selectedFile.getClass().getDeclaredFields();
-        for(Field f: atributos) {
-        	System.out.println(f.getName());
-        }
-	   
-        int lineNum = 0;
-	    while (scanner.hasNextLine()) {
-	        String line = scanner.nextLine();
-	        //Number of lines per method
-	        if(line.contains("public") || line.contains("private") && line.contains("{")) {
-	        	lineNum++;	        	
-	        }
-	    }
-	    System.out.println("Number of methods: " + lineNum);
-	}
-	public ArrayList <String> getArray(){
-		return array;
-	}
-	
 
 
 	public static void main(String[] args) throws IOException {
