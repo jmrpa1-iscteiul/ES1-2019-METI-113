@@ -1,11 +1,11 @@
 package projeto;
 
-public class Regra_1 {
- 
+public class Regra {
+
 	private String nome, name_metrica1, operator, name_metrica2; 
 	private int value_metrica1, value_metrica2;
 	
-	public Regra_1(String nome, String name_metrica1, int value_metrica1, String operator, String name_metrica2, int value_metrica2) {
+	public Regra(String nome, String name_metrica1, int value_metrica1, String operator, String name_metrica2, int value_metrica2) {
 		this.nome=nome;
 		this.name_metrica1=name_metrica1;
 		this.name_metrica2=name_metrica2;

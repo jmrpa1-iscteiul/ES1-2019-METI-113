@@ -28,8 +28,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
- 
-public class GUI_1{
+
+public class GUI{
 
 	
 	private JFrame firstFrame;
@@ -40,10 +40,10 @@ public class GUI_1{
 	private JFormattedTextField  fieldLOC, fieldCYCLO, fieldATFD, fieldLAA;
 	private ArrayList<String>array = new ArrayList<String>();
 	private JTable table;
-	private GUI_regras_1 guiRegras;
+	private GUI_regras guiRegras;
 	private JTextField dciplasma, dcipmi,diiplasma,diipmi,adciplasma,adcipmi,adiiplasma,adiipmi;
 	
-	public GUI_1() {
+	public GUI() {
 		
 		firstFrame = new JFrame();
 		firstFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -158,7 +158,7 @@ public class GUI_1{
 		buttonsPanel.add(fazerRegraButton);
 		fazerRegraButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guiRegras = new GUI_regras_1();
+				guiRegras = new GUI_regras();
 			}
 		
 		});	
@@ -180,7 +180,6 @@ public class GUI_1{
 
 	private void contentSecondFrame() {
 		secondFrame = new JFrame();
-		secondFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		secondFrame.setLayout(new BorderLayout());
 		secondFrame.pack();
 		
@@ -199,15 +198,18 @@ public class GUI_1{
 		int rows=1;
 		int tempLOC=0;
 		int tempCYCLO=0;
+		int tempATFD=0;
+		int tempLAA=0;
 		boolean is_long_method=false;
+		boolean is_feature_envy=false;
 		boolean tempiPlasma=false, tempPMD=false;
 		iPlasmaErrors=0;PMDErrors=0;
 		
 		int DCIplasma=0; int DIIplasma=0; int ADCIplasma=0; int ADIIplasma=0;
 		int DCIpmd=0; int DIIpmd=0; int ADCIpmd=0; int ADIIpmd=0;
 
-		Regra_1 regra_is_long_method = guiRegras.getIs_long_method();
-	//	Regra regra_is_feature_envy = guiRegras.getIs_feature_envy();
+		Regra regra_is_long_method = guiRegras.getIs_long_method();
+		Regra regra_is_feature_envy = guiRegras.getIs_feature_envy();
 		
 		while(rows<table.getRowCount()) { // trocar por rows<table.getRowCount()!!!!
 			String s = table.getValueAt(rows, 4).toString();
@@ -219,17 +221,41 @@ public class GUI_1{
 			s1 =s.split("\\.");			
 			tempCYCLO=Integer.parseInt(s1[0]);
 			
+			s = table.getValueAt(rows, 6).toString();
+			String [] s2 = s.split("\\.");
+			tempATFD=Integer.parseInt(s2[0]);
+			
+			s = table.getValueAt(rows, 7).toString();
+			String [] s3 = s.split("\\.");
+			tempLAA=Integer.parseInt(s3[0]);
+			
 			//System.out.println(tempLOC + " ," + tempCYCLO);
+			
+			if(regra_is_feature_envy.getOperator().equals("&&")) {
+				if(tempATFD>regra_is_feature_envy.getValue_metrica1() && tempLAA>regra_is_feature_envy.getValue_metrica2()) {
+					is_feature_envy=true;
+				}
+			}
+			
+			else {
+				if(tempATFD>regra_is_feature_envy.getValue_metrica1() || tempLAA>regra_is_feature_envy.getValue_metrica2()) {
+				//	System.out.println("Linha " + rows + " is_long_method");
+					is_feature_envy=true;	
+					
+				}
+			}
 		
 			if(regra_is_long_method.getOperator().equals("&&")) {
 				if(tempLOC>regra_is_long_method.getValue_metrica1() && tempCYCLO>regra_is_long_method.getValue_metrica2()) {
 			//		System.out.println("Linha " + rows + " is_long_method");
-					is_long_method=true;	
+					is_long_method=true;
+					
 				}
 			} else {
 				if(tempLOC>regra_is_long_method.getValue_metrica1() || tempCYCLO>regra_is_long_method.getValue_metrica2()) {
 				//	System.out.println("Linha " + rows + " is_long_method");
 					is_long_method=true;	
+					
 				}
 			}
 				
@@ -239,6 +265,7 @@ public class GUI_1{
 			switch(iPlasmaString) { //iplasma
 				case "false":
 					tempiPlasma=false;
+				
 				break;
 				case "true":
 					tempiPlasma=true;
@@ -284,7 +311,7 @@ public class GUI_1{
 				ADIIpmd++;
 			}
 			
-			System.out.println("Plasma=" + Boolean.valueOf(tempiPlasma) + ", PMD=" + Boolean.valueOf(tempPMD));
+			System.out.println("Plasma=" + Boolean.valueOf(tempiPlasma) + ", PMD=" + Boolean.valueOf(tempPMD) + ", long_method=" + Boolean.valueOf(is_long_method) + ", is_feature_envy=" + Boolean.valueOf(is_feature_envy));
 			
 			if(!Boolean.valueOf(is_long_method).equals(Boolean.valueOf(tempiPlasma))) {
 				iPlasmaErrors++;
@@ -353,6 +380,6 @@ public class GUI_1{
 
 
 	public static void main(String[] args) throws IOException {
-		GUI_1 gui = new GUI_1();
+		GUI gui = new GUI();
 	}
 }

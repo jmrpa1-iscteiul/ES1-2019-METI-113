@@ -7,9 +7,13 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.HashMap;
+import java.awt.event.*; 
+import java.awt.*; 
+import javax.swing.*;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,9 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.text.NumberFormatter;
- 
-public class GUI_regras_1 {
-	
+
+public class GUI_regras {
+
 	private JFrame frame;
 	private JPanel metricsPanel, metricsPanel2;
 	private JComboBox<String> box_operador_1, box_operador_2;
@@ -28,40 +32,47 @@ public class GUI_regras_1 {
 	private int loc, cyclo, atfd, laa;
 	private HashMap<String,Integer> hashValues = new HashMap<String,Integer>();
 	private HashMap<String,String> hashThreshold = new HashMap<String,String>();
-	
-	private Regra_1 is_long_method, is_feature_envy;
-	
 
-	public GUI_regras_1() {
+	private Regra is_long_method, is_feature_envy;
+
+
+	public GUI_regras() {
 		frame = new JFrame();
-	//	frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		//	frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		  
-	    addContent();
-	    
-	    frame.pack();
+
+		addContent();
+
+		frame.pack();
 		frame.setSize(1000, 300); 
 		frame.setVisible(true);	
-	    
+
 	}
 
-	
+
 	private void addContent() {
-		
-		
+
+
 		addIsLongMethodFields();
-		
+
 		JButton criarRegra = new JButton("Criar Regra");
 		frame.add(criarRegra, BorderLayout.SOUTH);
-		
+
 		criarRegra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getRegra();	
+				if (!loc_value.getText().equals("") && !cyclo_value.getText().equals("") && !atfd_value.getText().equals("") && !laa_value.getText().equals("") && box_operador_1.getSelectedIndex() != -1 && box_operador_2.getSelectedIndex() != -1) {
+					getRegra();
+					JOptionPane.showMessageDialog( null,"Regra criada com Sucesso!");
+					frame.setVisible(false);
+				}else {
+
+					JOptionPane.showMessageDialog( null,"Deve Preencher Todos os Campos e Selecionar os Operadores");
+				}
 			}
 		});	
 
 	}
-	
+
 	private void addIsLongMethodFields() {
 		NumberFormat longFormat = NumberFormat.getIntegerInstance();
 
@@ -71,28 +82,28 @@ public class GUI_regras_1 {
 
 		metricsPanel = new JPanel();
 		metricsPanel.setLayout(new GridLayout(2,8));
-		
+
 		//metricsPanel2 = new JPanel();
 		//metricsPanel2.setLayout(new GridLayout(1,8));
 		frame.add(metricsPanel, BorderLayout.NORTH);
 		//frame.add(label2, BorderLayout.CENTER);
-		
+
 		caixa9 = new JTextField("is long method");
 		caixa9.setEditable(false);
 		metricsPanel.add(caixa9);
-		
+
 		caixa1 = new JTextField("LOC");
 		caixa1.setEditable(false);
 		metricsPanel.add(caixa1);
-		
+
 		caixa2 = new JTextField(">");
 		caixa2.setEditable(false);
 		metricsPanel.add(caixa2);
-		
+
 		loc_value = new JTextField(); 
 		metricsPanel.add(loc_value);
 		//loc=Integer.parseInt(metric_1_value.getText());
-				
+
 		box_operador_1 = new JComboBox<String>();
 		box_operador_1.addItem("&&");
 		box_operador_1.addItem("||");
@@ -102,30 +113,30 @@ public class GUI_regras_1 {
 		caixa3 = new JTextField("CYCLO");
 		caixa3.setEditable(false);
 		metricsPanel.add(caixa3);
-		
+
 		caixa4 = new JTextField(">");
 		caixa4.setEditable(false);
 		metricsPanel.add(caixa4);
-		
-		cyclo_value = new JFormattedTextField(numberFormatter); 
+
+		cyclo_value = new JTextField(); 
 		metricsPanel.add(cyclo_value);
-		
+
 		caixa10 = new JTextField("is feature envy");
 		caixa10.setEditable(false);
 		metricsPanel.add(caixa10);
-		
+
 		caixa5 = new JTextField("ATFD");
 		caixa5.setEditable(false);
 		metricsPanel.add(caixa5);
-		
+
 		caixa6 = new JTextField(">");
 		caixa6.setEditable(false);
 		metricsPanel.add(caixa6);
-		
-		
-		atfd_value = new JFormattedTextField(numberFormatter); 
+
+
+		atfd_value = new JTextField(); 
 		metricsPanel.add(atfd_value);
-		
+
 		box_operador_2 = new JComboBox<String>();
 		box_operador_2.addItem("&&");
 		box_operador_2.addItem("||");
@@ -135,38 +146,38 @@ public class GUI_regras_1 {
 		caixa7 = new JTextField("LAA");
 		caixa7.setEditable(false);
 		metricsPanel.add(caixa7);
-		
+
 		caixa8 = new JTextField("<");
 		caixa8.setEditable(false);
 		metricsPanel.add(caixa8);
-		
-		laa_value = new JFormattedTextField(numberFormatter); 
-		metricsPanel.add(laa_value);
-		
-	
-	}
-	
-	private void getRegra() {
-		is_long_method = new Regra_1("is_long_method", "LOC", Integer.parseInt(loc_value.getText()),
-				String.valueOf(box_operador_1.getSelectedItem()), "CYCLO",Integer.parseInt(cyclo_value.getText()));
-		
-		is_feature_envy = new Regra_1("is_feature_envy", "ATFD", Integer.parseInt(atfd_value.getText()),
-				String.valueOf(box_operador_2.getSelectedItem()), "LAA",Integer.parseInt(laa_value.getText()));
-		
-	
-	}
-	
 
-	public Regra_1 getIs_long_method() {
+		laa_value = new JTextField(); 
+		metricsPanel.add(laa_value);
+
+
+	}
+
+	private void getRegra() {
+		is_long_method = new Regra("is_long_method", "LOC", Integer.parseInt(loc_value.getText()),
+				String.valueOf(box_operador_1.getSelectedItem()), "CYCLO",Integer.parseInt(cyclo_value.getText()));
+
+		is_feature_envy = new Regra("is_feature_envy", "ATFD", Integer.parseInt(atfd_value.getText()),
+				String.valueOf(box_operador_2.getSelectedItem()), "LAA",Integer.parseInt(laa_value.getText()));
+
+
+	}
+
+
+	public Regra getIs_long_method() {
 		return is_long_method;
 	}
 
 
-	public Regra_1 getIs_feature_envy() {
+	public Regra getIs_feature_envy() {
 		return is_feature_envy;
 	}
 
-	
+
 	public HashMap<String, Integer> getHashValues() {
 		return hashValues;
 	}
@@ -175,9 +186,6 @@ public class GUI_regras_1 {
 		return hashThreshold;
 	}
 
-//	public static void main(String[] args) throws IOException {
-	//	GUI_regras gui = new GUI_regras();
-	//}
 
-	
+
 }
