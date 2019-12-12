@@ -34,9 +34,7 @@ public class Regra {
 		return value_metrica2;
 	}
 	
-	public void is(int tempMetrica1, int tempMetrica2) {
-		
-	}
+
 	
 	
 }

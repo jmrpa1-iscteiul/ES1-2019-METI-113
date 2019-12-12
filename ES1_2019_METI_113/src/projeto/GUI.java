@@ -32,7 +32,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class GUI{
 
 	
+	
 	private JFrame firstFrame;
+	private  CalcularMetricas calcularMetricas1;
 	private JFrame secondFrame;
 	private String[] columnNames = { "MethodID", "Package", "Class", "Method", "LOC", "CYCLO", "ATFD", "LAA", "is_long_method", "iPlasma", "PMD", "is_feature_envy" }; 
 	private String[][] data;
@@ -146,7 +148,7 @@ public class GUI{
 		generateButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				contentSecondFrame();
+			contentSecondFrame();
 				
 			}
 			
@@ -163,12 +165,36 @@ public class GUI{
 		
 		});	
 		
+		
 		JButton calcularMetricasButton = new JButton("Calcular Metricas");
 
 		buttonsPanel.add(calcularMetricasButton);
 		calcularMetricasButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				calcularMetricas();
+				Regra regra_is_long_method = guiRegras.getIs_long_method();
+				Regra regra_is_feature_envy = guiRegras.getIs_feature_envy();
+				CalcularMetricas calcularMetricas1= new CalcularMetricas(regra_is_long_method,regra_is_feature_envy, table);
+				calcularMetricas1.CalcularMetricas1();
+				calcularMetricas1.getADCIplasma();
+				calcularMetricas1.getADIIplasma();
+				calcularMetricas1.getADCIpmd();
+				calcularMetricas1.getADIIpmd();
+				calcularMetricas1.getDCIplasma();
+				calcularMetricas1.getDCIpmd();
+				calcularMetricas1.getDIIplasma();
+				calcularMetricas1.getDIIpmd();
+				
+
+				dciplasma.setText(Integer.toString(calcularMetricas1.getDCIplasma()));
+				dcipmi.setText(Integer.toString(calcularMetricas1.getDCIpmd()));
+				diiplasma.setText(Integer.toString(calcularMetricas1.getDIIplasma()));
+				diipmi.setText(Integer.toString(calcularMetricas1.getDIIpmd()));
+				adciplasma.setText(Integer.toString(calcularMetricas1.getADCIplasma()));
+				adcipmi.setText(Integer.toString(calcularMetricas1.getADCIpmd()));
+				adiiplasma.setText(Integer.toString(calcularMetricas1.getADIIplasma()));
+				adiipmi.setText(Integer.toString(calcularMetricas1.getADIIpmd()));
+				
+				
 		}
 		
 		});
@@ -194,145 +220,7 @@ public class GUI{
 	}
 	
 	
-	private void calcularMetricas() {
-		int rows=1;
-		int tempLOC=0;
-		int tempCYCLO=0;
-		int tempATFD=0;
-		int tempLAA=0;
-		boolean is_long_method=false;
-		boolean is_feature_envy=false;
-		boolean tempiPlasma=false, tempPMD=false;
-		iPlasmaErrors=0;PMDErrors=0;
 		
-		int DCIplasma=0; int DIIplasma=0; int ADCIplasma=0; int ADIIplasma=0;
-		int DCIpmd=0; int DIIpmd=0; int ADCIpmd=0; int ADIIpmd=0;
-
-		Regra regra_is_long_method = guiRegras.getIs_long_method();
-		Regra regra_is_feature_envy = guiRegras.getIs_feature_envy();
-		
-		while(rows<table.getRowCount()) { // trocar por rows<table.getRowCount()!!!!
-			String s = table.getValueAt(rows, 4).toString();
-			
-			String [] s1 =s.split("\\.");
-			tempLOC=Integer.parseInt(s1[0]);
-			
-			s = table.getValueAt(rows, 5).toString();
-			s1 =s.split("\\.");			
-			tempCYCLO=Integer.parseInt(s1[0]);
-			
-			s = table.getValueAt(rows, 6).toString();
-			String [] s2 = s.split("\\.");
-			tempATFD=Integer.parseInt(s2[0]);
-			
-			s = table.getValueAt(rows, 7).toString();
-			String [] s3 = s.split("\\.");
-			tempLAA=Integer.parseInt(s3[0]);
-			
-			//System.out.println(tempLOC + " ," + tempCYCLO);
-			
-			if(regra_is_feature_envy.getOperator().equals("&&")) {
-				if(tempATFD>regra_is_feature_envy.getValue_metrica1() && tempLAA>regra_is_feature_envy.getValue_metrica2()) {
-					is_feature_envy=true;
-				}
-			}
-			
-			else {
-				if(tempATFD>regra_is_feature_envy.getValue_metrica1() || tempLAA>regra_is_feature_envy.getValue_metrica2()) {
-				//	System.out.println("Linha " + rows + " is_long_method");
-					is_feature_envy=true;	
-					
-				}
-			}
-		
-			if(regra_is_long_method.getOperator().equals("&&")) {
-				if(tempLOC>regra_is_long_method.getValue_metrica1() && tempCYCLO>regra_is_long_method.getValue_metrica2()) {
-			//		System.out.println("Linha " + rows + " is_long_method");
-					is_long_method=true;
-					
-				}
-			} else {
-				if(tempLOC>regra_is_long_method.getValue_metrica1() || tempCYCLO>regra_is_long_method.getValue_metrica2()) {
-				//	System.out.println("Linha " + rows + " is_long_method");
-					is_long_method=true;	
-					
-				}
-			}
-				
-			
-			String iPlasmaString =(String) table.getValueAt(rows, 9);
-
-			switch(iPlasmaString) { //iplasma
-				case "false":
-					tempiPlasma=false;
-				
-				break;
-				case "true":
-					tempiPlasma=true;
-				break;
-				
-			}
-			
-			String PMDString =(String) table.getValueAt(rows, 10);
-			switch(PMDString) { //iplasma
-				case "false":
-					tempPMD=false;
-				break;
-				case "true":
-					tempPMD=true;
-				break;
-				
-			}
-			
-			if(Boolean.valueOf(is_long_method).equals(true) && Boolean.valueOf(tempiPlasma).equals(true)) {
-				DCIplasma++;
-			}
-			if(Boolean.valueOf(is_long_method).equals(false) && Boolean.valueOf(tempiPlasma).equals(true)) {
-				DIIplasma++;
-			}
-			if(Boolean.valueOf(is_long_method).equals(false) && Boolean.valueOf(tempiPlasma).equals(false)) {
-				ADCIplasma++;
-			}
-			if(Boolean.valueOf(is_long_method).equals(true) && Boolean.valueOf(tempiPlasma).equals(false)) {
-				ADIIplasma++;
-			}
-			
-			if(Boolean.valueOf(is_long_method).equals(true) && Boolean.valueOf(tempPMD).equals(true)) {
-				DCIpmd++;
-			}
-			if(Boolean.valueOf(is_long_method).equals(false) && Boolean.valueOf(tempPMD).equals(true)) {
-				DIIpmd++;
-			}
-			if(Boolean.valueOf(is_long_method).equals(false) && Boolean.valueOf(tempPMD).equals(false)) {
-				System.out.println("pmd " + rows);
-				ADCIpmd++;
-			}
-			if(Boolean.valueOf(is_long_method).equals(true) && Boolean.valueOf(tempPMD).equals(false)) {
-				ADIIpmd++;
-			}
-			
-			System.out.println("Plasma=" + Boolean.valueOf(tempiPlasma) + ", PMD=" + Boolean.valueOf(tempPMD) + ", long_method=" + Boolean.valueOf(is_long_method) + ", is_feature_envy=" + Boolean.valueOf(is_feature_envy));
-			
-			if(!Boolean.valueOf(is_long_method).equals(Boolean.valueOf(tempiPlasma))) {
-				iPlasmaErrors++;
-			}
-			if(!Boolean.valueOf(is_long_method).equals(Boolean.valueOf(tempPMD)))
-				PMDErrors++;
-			
-			
-			rows++;
-		}
-		
-		dciplasma.setText(Integer.toString(DCIplasma));
-		dcipmi.setText(Integer.toString(DCIpmd));
-		diiplasma.setText(Integer.toString(DIIplasma));
-		diipmi.setText(Integer.toString(DIIpmd));
-		adciplasma.setText(Integer.toString(ADCIplasma));
-		adcipmi.setText(Integer.toString(ADCIpmd));
-		adiiplasma.setText(Integer.toString(ADIIplasma));
-		adiipmi.setText(Integer.toString(ADIIpmd));
-	}
-	
 	public String[][] readExcel(String excelFilePath) throws IOException {
     	String[][] matrix = new String[421][12];
     	int iMatrix=0; 
