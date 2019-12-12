@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class Regras1_teste { 
+class Regra_teste { 
 
 			
 	Regra regra_long_method1 = new Regra("is_long_method", "LOC", 3, "&&", "CYCLO", 6);	
@@ -12,7 +12,7 @@ class Regras1_teste {
 	
 	
 	@Test 
-	void getName_metrica1Test() {
+	void getName_metrica1Test() { 
 		assertEquals(regra_long_method1.getName_metrica1(), "LOC");
 		assertEquals(regra_is_feature_envy_1.getName_metrica1(), "ATFD");
 	
