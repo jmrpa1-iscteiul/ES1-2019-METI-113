@@ -73,7 +73,7 @@ public class GUI{
 		JPanel indicators = new JPanel();
 		firstFrame.add(indicators,BorderLayout.SOUTH);
 		indicators.setLayout(new GridLayout(5,3));
-		
+		 
 		indicators.add(new JLabel ("Indicadores"));
 		indicators.add(new JLabel ("iPlasma"));
 		indicators.add(new JLabel ("PMI"));

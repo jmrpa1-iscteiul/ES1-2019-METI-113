@@ -19,7 +19,7 @@ public class Regra {
 		this.value_metrica1=value_metrica1;
 		this.value_metrica2=value_metrica2;
 		this.operator=operator;
-	}	
+	}	 
 
 	
 	/**metodo que retorna a metrica1 ( por exemplo long_method)

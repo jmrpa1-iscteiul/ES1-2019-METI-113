@@ -186,7 +186,7 @@ public class GUI_regras {
 	 */
 	public Regra getIs_long_method() {
 		return is_long_method;
-	}
+	} 
 
 	/**metodo que retorna a regra criada pela funcao GetRegra().
 	 * retorna um future_envy
