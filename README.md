@@ -20,3 +20,5 @@ Para iniciar corretamente a aplicação deverá seguir os seguintes passos:
 >>>>>* ###### __ATFD__ _(Acesso do método a métodos de outras classes)_
 >>>>>* ###### __LAA__ _(Acesso do método a atributos da própria classe)_
 >>>>>* ###### __Operadores Lógicos:__ && ( _"AND"_ ) e || ( _"OR"_ ) 
+* Clique na opção _"Calcular Métricas"_ para vizualizar os tipos de defeitos presentes nos métodos analisados, obtendo a seguinte interface:
+![Alt](https://user-images.githubusercontent.com/56137733/70734378-0ccc1f00-1d04-11ea-9fa6-9fc24ed54ca2.JPG)
