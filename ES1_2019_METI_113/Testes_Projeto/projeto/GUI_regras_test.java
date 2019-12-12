@@ -16,7 +16,7 @@ class GUI_regras_test {
 	
 	 
 	@Test
-	public void getIs_long_methodTest() {
+	public void getIs_long_methodTest() { 
 		assertEquals(gui_regras.getIs_long_method(),is_long_method);
 	}
 	 
