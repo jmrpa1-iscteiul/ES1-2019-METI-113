@@ -16,3 +16,4 @@ Para iniciar corretamente a aplicação deverá seguir os seguintes passos:
 * Clique na opção _"Criar Regra"_ irá agora seleccionar os valores das métricas:
 >>>>>* __LOC__ _(Nº de linhas do código)_
 >>>>>* __Cyclo__ _(Complexidade do ciclomática do método)_
+>>>>>* ![Alt](https://user-images.githubusercontent.com/56137733/70728962-3718df00-1cfa-11ea-96ad-79ee3a8bf641.JPG)
