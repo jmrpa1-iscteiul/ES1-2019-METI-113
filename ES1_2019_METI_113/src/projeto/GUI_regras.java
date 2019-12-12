@@ -4,22 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.awt.event.*; 
-import java.awt.*; 
+import java.text.NumberFormat;     
 import javax.swing.*;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 import javax.swing.text.NumberFormatter;
 
 
@@ -31,13 +22,10 @@ import javax.swing.text.NumberFormatter;
 public class GUI_regras {
 
 	private JFrame frame;
-	private JPanel metricsPanel, metricsPanel2;
+	private JPanel metricsPanel;
 	private JComboBox<String> box_operador_1, box_operador_2;
 	private JTextField caixa1, caixa2, caixa3, caixa4, caixa5, caixa6, caixa7, caixa8, caixa9, caixa10;
 	private JTextField loc_value, cyclo_value, atfd_value, laa_value;
-	private int loc, cyclo, atfd, laa;
-	
-
 	private Regra is_long_method, is_feature_envy;
 
 
@@ -56,7 +44,7 @@ public class GUI_regras {
 
 
 	/**Funcao para adicionar a metrica long_method (addIsLongMethodFields()) e os fields do long_method,
-	 * botao para criar a regra e tratamento de excepcoes (inserir espaços em branco)
+	 * botao para criar a regra e tratamento de excepcoes (inserir espaÃ§os em branco)
 	 */
 	private void addContent() {
 
@@ -81,9 +69,9 @@ public class GUI_regras {
 
 	}
 
-	/**adicionar os Jtextfields à interface grafica
+	/**adicionar os Jtextfields Ã  interface grafica
 	 * medoto para inserir os parametros do long method "LOC", Numero de linhas, "CYCLO", complexidade desejada,
-	 * adicionar os Jtextfields à interface grafica
+	 * adicionar os Jtextfields Ã  interface grafica
 	 *
 	 */
 	private void addIsLongMethodFields() {
@@ -195,9 +183,4 @@ public class GUI_regras {
 	public Regra getIs_feature_envy() {
 		return is_feature_envy;
 	}
-
-
-
-
-
 }
