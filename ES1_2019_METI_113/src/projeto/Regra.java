@@ -5,7 +5,7 @@ package projeto;
  * e o mesmo para a metrica2
  *@author joset, andreb
  *@Date 12/Dez/2019
- *@version 2.0
+ *@version 1.0
  */
 public class Regra {
 
