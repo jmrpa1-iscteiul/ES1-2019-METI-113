@@ -14,6 +14,6 @@ Para iniciar corretamente a aplicação deverá seguir os seguintes passos:
 * Clique na opção  _"Choose File"_ e selecione o ficheiro __Long-Method.xlsx__ ; 
 * Clique na opção _"Generate Table"_ e vizualize o ficheiro selecionado;
 * Clique na opção _"Criar Regra"_ irá agora seleccionar os valores das métricas:
->>>>>* __LOC__ _(Nº de linhas do código)_
->>>>>* __Cyclo__ _(Complexidade do ciclomática do método)_
+>>>>>* ###### __LOC__ _(Nº de linhas do código)_
+>>>>>* ###### __Cyclo__ _(Complexidade do ciclomática do método)_
 >>>>>* ![Alt](https://user-images.githubusercontent.com/56137733/70728962-3718df00-1cfa-11ea-96ad-79ee3a8bf641.JPG)
