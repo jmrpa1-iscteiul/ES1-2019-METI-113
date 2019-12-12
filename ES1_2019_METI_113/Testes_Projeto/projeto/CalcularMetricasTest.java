@@ -12,7 +12,7 @@ class CalcularMetricasTest {
 	private Regra b1 = null;
 	private String[] columnNames = { "MethodID", "Package", "Class", "Method", "LOC", "CYCLO", "ATFD", "LAA", "is_long_method", "iPlasma", "PMD", "is_feature_envy" }; 
 	private JTable table = new JTable(421, 12);
- 
+  
 	CalcularMetricas calcularmetricas = new CalcularMetricas(x1, b1, table);
 
 	@Test

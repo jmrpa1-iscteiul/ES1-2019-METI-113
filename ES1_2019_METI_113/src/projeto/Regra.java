@@ -6,7 +6,7 @@ package projeto;
  *@author joset, andreb
  *@Date 12/Dez/2019
  *@version 1.0
- */
+ */ 
 public class Regra {
 
 	private String nome, name_metrica1, operator, name_metrica2; 
