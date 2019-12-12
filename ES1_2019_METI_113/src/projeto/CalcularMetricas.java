@@ -6,6 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+/** Classe para calcular a quantidade dos metodos is_long_method e is_feature_method ao longo do ficheiro Excel e das métricas
+ * 
+ * @author Andreb , jmrpa1 
+ * @Date   12/Dez/2019
+ * version 1.0
+ */
+
 public class CalcularMetricas {
 	
 	private JTable table;
@@ -26,6 +33,11 @@ public class CalcularMetricas {
 	private Regra x1;
 	private Regra b1;
 	
+	/**
+	 * @param x1 - Regra relativa ao defeito is_long_method
+	 * @param b1 - Regra relativa ao defeito is_feature_method
+	 * @param table - Tabela relativa ao ficheiro Excel
+	 */
 	public CalcularMetricas(Regra x1, Regra b1, JTable table) {
 		this.x1 = x1;
 		this.b1 = b1;
@@ -34,6 +46,10 @@ public class CalcularMetricas {
 	}
 
 	
+	
+	/**
+	 * Método para calcular as métricas perante a regra definida pelo utilizador e também calcula o numero total de cada indicador
+	 */
 	
 	public void CalcularMetricas1() {
 		
@@ -153,29 +169,67 @@ public class CalcularMetricas {
 	
 	}
 	
+	/**
+	 * @return o valor do indicador ADCI em relaçao à ferramenta iPlasma
+	 */
 	public int getADCIplasma() {
 		return ADCIplasma;
 	}
 	
+	
+	/**
+	 * @return o valor do indicador ADCI em relaçao à ferramenta PMD
+	 */
 	public int getADCIpmd() {
 		return ADCIpmd;
 	}
 	
+	
+	/**
+	 * @return o valor do indicador ADII em relaçao à ferramenta iPlasma
+	 */
 	public int getADIIplasma() {
 		return ADIIplasma;
 	}
+	
+	
+	/**
+	 * @return o valor do indicador ADII em relaçao à ferramenta PMD
+	 */
 	public int getADIIpmd() {
 		return ADIIpmd;
 	}
+	
+	
+	/**
+	 * @return o valor do indicador DCI em relaçao à ferramenta iPlasma
+	 */
 	public int getDCIplasma() {
 		return DCIplasma;
 	}
+	
+	
+	/**
+	 * @return o valor do indicador DCI em relaçao à ferramenta PMD
+	 */
 	public int getDCIpmd() {
 		return DCIpmd;
 	}
+	
+	
+	
+	/**
+	 * @return o valor do indicador DII em relaçao à ferramenta iPlasma
+	 */
 	public int getDIIplasma() {
 		return DIIplasma;
 	}
+	
+	
+	/**
+	 * @return o valor do indicador DII em relaçao à ferramenta iPlasma
+	 */
+	
 	public int getDIIpmd() {
 		return DIIpmd;
 	}
