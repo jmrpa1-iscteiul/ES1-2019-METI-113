@@ -1,12 +1,8 @@
 package projeto;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-/** Classe para calcular a quantidade dos metodos is_long_method e is_feature_method ao longo do ficheiro Excel e das métricas
+/** Classe para calcular a quantidade dos metodos is_long_method e is_feature_method ao longo do ficheiro Excel e das mÃ©tricas
  * 
  * @author Andreb , jmrpa1 
  * @Date   12/Dez/2019 
@@ -14,7 +10,7 @@ import javax.swing.JTable;
  */  
 
 public class CalcularMetricas {
-	
+	     
 	private JTable table;
 	private int rows=1;
 	private int tempLOC=0;
@@ -24,8 +20,6 @@ public class CalcularMetricas {
 	private boolean is_long_method=false;
 	private boolean is_feature_envy=false;
 	private boolean tempiPlasma=false, tempPMD=false;
-	private int iPlasmaErrors=0; //nao esta implementado
-	private int PMDErrors=0; //nao esta implementado
 	private int DCIplasma; int DIIplasma=0; int ADCIplasma=0; int ADIIplasma=0;
 	private int DCIpmd=0; int DIIpmd=0; int ADCIpmd=0; int ADIIpmd=0;
 	
@@ -48,7 +42,7 @@ public class CalcularMetricas {
 	
 	
 	/**
-	 * Método para calcular as métricas perante a regra definida pelo utilizador e também calcula o numero total de cada indicador
+	 * MÃ©todo para calcular as mÃ©tricas perante a regra definida pelo utilizador e tambÃ©m calcula o numero total de cada indicador
 	 */
 	
 	public void CalcularMetricas1() {
@@ -156,13 +150,6 @@ public class CalcularMetricas {
 		
 		System.out.println("Plasma=" + Boolean.valueOf(tempiPlasma) + ", PMD=" + Boolean.valueOf(tempPMD) + ", long_method=" + Boolean.valueOf(is_long_method) + ", is_feature_envy=" + Boolean.valueOf(is_feature_envy));
 		
-		if(!Boolean.valueOf(is_long_method).equals(Boolean.valueOf(tempiPlasma))) {
-			iPlasmaErrors++;
-		}
-		if(!Boolean.valueOf(is_long_method).equals(Boolean.valueOf(tempPMD)))
-			PMDErrors++;
-		
-		
 		rows++;
 	}
 	
@@ -170,7 +157,7 @@ public class CalcularMetricas {
 	}
 	
 	/**
-	 * @return o valor do indicador ADCI em relaçao à ferramenta iPlasma
+	 * @return o valor do indicador ADCI em relaÃ§ao Ã  ferramenta iPlasma
 	 */
 	public int getADCIplasma() {
 		return ADCIplasma;
@@ -178,7 +165,7 @@ public class CalcularMetricas {
 	
 	
 	/**
-	 * @return o valor do indicador ADCI em relaçao à ferramenta PMD
+	 * @return o valor do indicador ADCI em relaÃ§ao Ã  ferramenta PMD
 	 */
 	public int getADCIpmd() {
 		return ADCIpmd;
@@ -186,7 +173,7 @@ public class CalcularMetricas {
 	
 	
 	/**
-	 * @return o valor do indicador ADII em relaçao à ferramenta iPlasma
+	 * @return o valor do indicador ADII em relaÃ§ao Ã  ferramenta iPlasma
 	 */
 	public int getADIIplasma() {
 		return ADIIplasma;
@@ -194,7 +181,7 @@ public class CalcularMetricas {
 	
 	
 	/**
-	 * @return o valor do indicador ADII em relaçao à ferramenta PMD
+	 * @return o valor do indicador ADII em relaÃ§ao Ã  ferramenta PMD
 	 */
 	public int getADIIpmd() {
 		return ADIIpmd;
@@ -202,7 +189,7 @@ public class CalcularMetricas {
 	
 	
 	/**
-	 * @return o valor do indicador DCI em relaçao à ferramenta iPlasma
+	 * @return o valor do indicador DCI em relaÃ§ao Ã  ferramenta iPlasma
 	 */
 	public int getDCIplasma() {
 		return DCIplasma;
@@ -210,7 +197,7 @@ public class CalcularMetricas {
 	
 	
 	/**
-	 * @return o valor do indicador DCI em relaçao à ferramenta PMD
+	 * @return o valor do indicador DCI em relaÃ§ao Ã  ferramenta PMD
 	 */
 	public int getDCIpmd() {
 		return DCIpmd;
@@ -219,7 +206,7 @@ public class CalcularMetricas {
 	
 	
 	/**
-	 * @return o valor do indicador DII em relaçao à ferramenta iPlasma
+	 * @return o valor do indicador DII em relaÃ§ao Ã  ferramenta iPlasma
 	 */
 	public int getDIIplasma() {
 		return DIIplasma;
@@ -227,7 +214,7 @@ public class CalcularMetricas {
 	 
 	
 	/**
-	 * @return o valor do indicador DII em relaçao à ferramenta iPlasma
+	 * @return o valor do indicador DII em relaÃ§ao Ã  ferramenta iPlasma
 	 */
 	
 	public int getDIIpmd() {
@@ -245,7 +232,3 @@ public class CalcularMetricas {
 	}
 	
 }
-	
-	
-	
-	
