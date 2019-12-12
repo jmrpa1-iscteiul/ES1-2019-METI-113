@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class Regras1_teste {
+class Regras_teste { 
 
 			
 	Regra regra_long_method1 = new Regra("is_long_method", "LOC", 3, "&&", "CYCLO", 6);	
@@ -22,7 +22,7 @@ class Regras1_teste {
 		assertEquals(regra_long_method1.getOperator(), "&&");
 		assertEquals(regra_is_feature_envy_1.getOperator(), "||");
 		
-	}
+	 }
 	
 	@Test
 	void getName_metrica2() {

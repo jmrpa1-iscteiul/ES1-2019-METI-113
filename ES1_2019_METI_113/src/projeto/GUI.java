@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.File; 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,12 +29,19 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+
+/**Classe para a criação da interface gráfica, que contém os 4 tipos de opções disponibilizadas pelo software, "Choose File", "Generate Table", "Criar Regra", "Calcular Métricas";
+ * Apresenta ainda os valores dos defeitos (DCI, DII, ADCI, ADII) das ferramentas iPlasma e PMI.
+ * @author Diogo, andreB, candido
+ * @Date 12/Dez/2019
+ * @version 1.0
+ */
 public class GUI{
- 
+
 	
-	 
+	
 	private JFrame firstFrame;
-	private  CalcularMetricas calcularMetricas1;
+	private CalcularMetricas calcularMetricas1;
 	private JFrame secondFrame;
 	private String[] columnNames = { "MethodID", "Package", "Class", "Method", "LOC", "CYCLO", "ATFD", "LAA", "is_long_method", "iPlasma", "PMD", "is_feature_envy" }; 
 	private String[][] data;
@@ -55,7 +62,9 @@ public class GUI{
 		
 	}
 	
-	private void open() {
+	/**Método responsável por criar e definir os limites da interface gráfica (500/300); 
+	 */
+	public void open() {
 		firstFrame = new JFrame();
 		firstFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		firstFrame.setLayout(new BorderLayout());
@@ -67,13 +76,19 @@ public class GUI{
 	    firstFrame.setVisible(true); 
 	}
 	
+	/** Método principal para a criação da interface gráfica, onde são gerados dois "Jpanel" (ButtonsPanel) e (Indicators),
+	 * divindo assim a interface em dois paines, (buttonsPanel) a Norte contendo os "Jbuttons" com as diferentes opções
+	 * e o painel de (Indicators) a Sul contendo "JtextFields" e "JLabels" com os respetivos indicadores e valores das ferramentas iPlasma e PMD.
+	 *De notar ainda que o JPanel (indicators) foi criado com a topologia de GridLayout (5 por 3) por forma a aperfeiçoar a interface.
+	 * 
+	 */
 	private void addContentButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
 		firstFrame.add(buttonsPanel, BorderLayout.NORTH);
 		JPanel indicators = new JPanel();
 		firstFrame.add(indicators,BorderLayout.SOUTH);
 		indicators.setLayout(new GridLayout(5,3));
-		 
+		
 		indicators.add(new JLabel ("Indicadores"));
 		indicators.add(new JLabel ("iPlasma"));
 		indicators.add(new JLabel ("PMI"));
@@ -204,7 +219,7 @@ public class GUI{
 	}
 
 
-	private void contentSecondFrame() {
+	public void contentSecondFrame() {
 		secondFrame = new JFrame();
 		secondFrame.setLayout(new BorderLayout());
 		secondFrame.pack();
@@ -221,6 +236,13 @@ public class GUI{
 	
 	
 		
+	/**Esta função tal como o título indica, irá ler o ficheiro excel que for selecionado;
+	 * Para essa seleção recorremos a métodos da classe workbook, possibilitanto o uso do método do tipo "FileInputStream";
+	 * A função irá então devolver o ficheiro selecionado, em forma de matriz de tamanho [421] [12];
+	 * @param excelFilePath
+	 * @return matrix
+	 * @throws IOException
+	 */
 	public String[][] readExcel(String excelFilePath) throws IOException {
     	String[][] matrix = new String[421][12];
     	int iMatrix=0; 

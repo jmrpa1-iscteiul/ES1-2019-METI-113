@@ -7,7 +7,7 @@ import javax.swing.JTable;
 import org.junit.jupiter.api.Test;
 
 class CalcularMetricasTest {
-	
+	 
 	private Regra x1 = null;
 	private Regra b1 = null;
 	private String[] columnNames = { "MethodID", "Package", "Class", "Method", "LOC", "CYCLO", "ATFD", "LAA", "is_long_method", "iPlasma", "PMD", "is_feature_envy" }; 
@@ -16,10 +16,10 @@ class CalcularMetricasTest {
 	CalcularMetricas calcularmetricas = new CalcularMetricas(x1, b1, table);
 
 	@Test
-	public void RegraTest() {
+	public void RegraTest() { 
 		assertEquals(null, calcularmetricas.getRegra1());
 		assertEquals(null, calcularmetricas.getRegra2());
-	}
+	 }
 	
 	@Test
 	public void TableTest() {

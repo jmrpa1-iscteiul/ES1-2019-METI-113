@@ -5,12 +5,12 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+ 
 /** Classe para calcular a quantidade dos metodos is_long_method e is_feature_method ao longo do ficheiro Excel e das métricas
- * 
+ *  
  * @author Andreb , jmrpa1 
- * @Date   12/Dez/2019
- * version 1.0
+ * @Date   12/Dez/2019 
+ * version 1.0 
  */  
 
 public class CalcularMetricas {

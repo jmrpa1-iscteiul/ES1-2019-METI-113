@@ -26,10 +26,10 @@ import javax.swing.text.NumberFormatter;
 /**Classe para a criacao da interface grafica das metricas long_method e feature_envy
  *@author joset, joaos
  *@Date 12/Dez/2019 
- *@version 1.0 
+ *@version 1.0   
  */
 public class GUI_regras {
-
+ 
 	private JFrame frame;
 	private JPanel metricsPanel, metricsPanel2;
 	private JComboBox<String> box_operador_1, box_operador_2;
