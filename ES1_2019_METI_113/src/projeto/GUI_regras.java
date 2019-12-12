@@ -22,6 +22,12 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.text.NumberFormatter;
 
+
+/**Classe para a criacao da interface grafica das metricas long_method e feature_envy
+ *@author joset, joaos
+ *@Date 12/Dez/2019
+ *@version 2.0
+ */
 public class GUI_regras {
 
 	private JFrame frame;
@@ -30,8 +36,7 @@ public class GUI_regras {
 	private JTextField caixa1, caixa2, caixa3, caixa4, caixa5, caixa6, caixa7, caixa8, caixa9, caixa10;
 	private JTextField loc_value, cyclo_value, atfd_value, laa_value;
 	private int loc, cyclo, atfd, laa;
-	private HashMap<String,Integer> hashValues = new HashMap<String,Integer>();
-	private HashMap<String,String> hashThreshold = new HashMap<String,String>();
+	
 
 	private Regra is_long_method, is_feature_envy;
 
@@ -50,6 +55,9 @@ public class GUI_regras {
 	}
 
 
+	/**Funcao para adicionar a metrica long_method (addIsLongMethodFields()) e os fields do long_method,
+	 * botao para criar a regra e tratamento de excepcoes (inserir espaços em branco)
+	 */
 	private void addContent() {
 
 
@@ -73,6 +81,11 @@ public class GUI_regras {
 
 	}
 
+	/**adicionar os Jtextfields à interface grafica
+	 * medoto para inserir os parametros do long method "LOC", Numero de linhas, "CYCLO", complexidade desejada,
+	 * adicionar os Jtextfields à interface grafica
+	 *
+	 */
 	private void addIsLongMethodFields() {
 		NumberFormat longFormat = NumberFormat.getIntegerInstance();
 
@@ -154,7 +167,9 @@ public class GUI_regras {
 
 
 	}
-
+	/**funcao para adicionar uma metrica, long_method e feature_envy, com base nos inputs do utilizador
+	 *
+	 */
 	public void getRegra() {
 		is_long_method = new Regra("is_long_method", "LOC", Integer.parseInt(loc_value.getText()),
 				String.valueOf(box_operador_1.getSelectedItem()), "CYCLO",Integer.parseInt(cyclo_value.getText()));
@@ -165,24 +180,23 @@ public class GUI_regras {
 
 	}
 
-
+	/**metodo que retorna a regra criada pela funcao GetRegra().
+	 * retorna um long_method
+	 *
+	 */
 	public Regra getIs_long_method() {
 		return is_long_method;
 	}
 
-
+	/**metodo que retorna a regra criada pela funcao GetRegra().
+	 * retorna um future_envy
+	 *
+	 */
 	public Regra getIs_feature_envy() {
 		return is_feature_envy;
 	}
 
 
-	public HashMap<String, Integer> getHashValues() {
-		return hashValues;
-	}
-
-	public HashMap<String, String> getHashThreshold() {
-		return hashThreshold;
-	}
 
 
 
