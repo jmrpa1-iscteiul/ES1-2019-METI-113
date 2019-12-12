@@ -8,12 +8,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,7 +28,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
-/**Classe para a criaÁ„o da interface gr·fica, que contÈm os 4 tipos de opÁıes disponibilizadas pelo software, "Choose File", "Generate Table", "Criar Regra", "Calcular MÈtricas";
+/**Classe para a cria√ß√£o da interface gr√°fica, que cont√©m os 4 tipos de op√ß√µes disponibilizadas pelo software, "Choose File", "Generate Table", "Criar Regra", "Calcular M√©tricas";
  * Apresenta ainda os valores dos defeitos (DCI, DII, ADCI, ADII) das ferramentas iPlasma e PMI.
  * @author Diogo, andreB, candido
  * @Date 12/Dez/2019
@@ -45,9 +43,6 @@ public class GUI{
 	private JFrame secondFrame;
 	private String[] columnNames = { "MethodID", "Package", "Class", "Method", "LOC", "CYCLO", "ATFD", "LAA", "is_long_method", "iPlasma", "PMD", "is_feature_envy" }; 
 	private String[][] data;
-	private int LOCvalue, CYCLOvalue, ATFDvalue, LAAvalue, iPlasmaErrors, PMDErrors;
-	private JFormattedTextField  fieldLOC, fieldCYCLO, fieldATFD, fieldLAA;
-	private ArrayList<String>array = new ArrayList<String>();
 	private JTable table;
 	private GUI_regras guiRegras;
 	private JTextField dciplasma, dcipmi,diiplasma,diipmi,adciplasma,adcipmi,adiiplasma,adiipmi;
@@ -57,14 +52,12 @@ public class GUI{
 		firstFrame = new JFrame();
 		firstFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		firstFrame.setLayout(new BorderLayout());
-		
-		open();
-		
+			
 	}
 	
-	/**MÈtodo respons·vel por criar e definir os limites da interface gr·fica (500/300); 
+	/**M√©todo respons√°vel por criar e definir os limites da interface gr√°fica (500/300); 
 	 */
-	private void open() {
+	public void open() {
 		firstFrame = new JFrame();
 		firstFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		firstFrame.setLayout(new BorderLayout());
@@ -76,10 +69,10 @@ public class GUI{
 	    firstFrame.setVisible(true); 
 	}
 	
-	/** MÈtodo principal para a criaÁ„o da interface gr·fica, onde s„o gerados dois "Jpanel" (ButtonsPanel) e (Indicators),
-	 * divindo assim a interface em dois paines, (buttonsPanel) a Norte contendo os "Jbuttons" com as diferentes opÁıes
+	/** M√©todo principal para a cria√ß√£o da interface gr√°fica, onde s√£o gerados dois "Jpanel" (ButtonsPanel) e (Indicators),
+	 * divindo assim a interface em dois paines, (buttonsPanel) a Norte contendo os "Jbuttons" com as diferentes op√ß√µes
 	 * e o painel de (Indicators) a Sul contendo "JtextFields" e "JLabels" com os respetivos indicadores e valores das ferramentas iPlasma e PMD.
-	 *De notar ainda que o JPanel (indicators) foi criado com a topologia de GridLayout (5 por 3) por forma a aperfeiÁoar a interface.
+	 *De notar ainda que o JPanel (indicators) foi criado com a topologia de GridLayout (5 por 3) por forma a aperfei√ßoar a interface.
 	 * 
 	 */
 	private void addContentButtonsPanel() {
@@ -188,7 +181,7 @@ public class GUI{
 			public void actionPerformed(ActionEvent e) {
 				Regra regra_is_long_method = guiRegras.getIs_long_method();
 				Regra regra_is_feature_envy = guiRegras.getIs_feature_envy();
-				CalcularMetricas calcularMetricas1= new CalcularMetricas(regra_is_long_method,regra_is_feature_envy, table);
+				calcularMetricas1= new CalcularMetricas(regra_is_long_method,regra_is_feature_envy, table);
 				calcularMetricas1.CalcularMetricas1();
 				calcularMetricas1.getADCIplasma();
 				calcularMetricas1.getADIIplasma();
@@ -199,16 +192,16 @@ public class GUI{
 				calcularMetricas1.getDIIplasma();
 				calcularMetricas1.getDIIpmd();
 				
-
+  
 				dciplasma.setText(Integer.toString(calcularMetricas1.getDCIplasma()));
 				dcipmi.setText(Integer.toString(calcularMetricas1.getDCIpmd()));
 				diiplasma.setText(Integer.toString(calcularMetricas1.getDIIplasma()));
 				diipmi.setText(Integer.toString(calcularMetricas1.getDIIpmd()));
 				adciplasma.setText(Integer.toString(calcularMetricas1.getADCIplasma()));
-				adcipmi.setText(Integer.toString(calcularMetricas1.getADCIpmd()));
+				adcipmi.setText(Integer.toString(calcularMetricas1.getADCIpmd())); 
 				adiiplasma.setText(Integer.toString(calcularMetricas1.getADIIplasma()));
 				adiipmi.setText(Integer.toString(calcularMetricas1.getADIIpmd()));
-				
+			 	
 				
 		}
 		
@@ -219,7 +212,7 @@ public class GUI{
 	}
 
 
-	private void contentSecondFrame() {
+	public void contentSecondFrame() {
 		secondFrame = new JFrame();
 		secondFrame.setLayout(new BorderLayout());
 		secondFrame.pack();
@@ -236,9 +229,9 @@ public class GUI{
 	
 	
 		
-	/**Esta funÁ„o tal como o tÌtulo indica, ir· ler o ficheiro excel que for selecionado;
-	 * Para essa seleÁ„o recorremos a mÈtodos da classe workbook, possibilitanto o uso do mÈtodo do tipo "FileInputStream";
-	 * A funÁ„o ir· ent„o devolver o ficheiro selecionado, em forma de matriz de tamanho [421] [12];
+	/**Esta fun√ß√£o tal como o t√≠tulo indica, ir√° ler o ficheiro excel que for selecionado;
+	 * Para essa sele√ß√£o recorremos a m√©todos da classe workbook, possibilitanto o uso do m√©todo do tipo "FileInputStream";
+	 * A fun√ß√£o ir√° ent√£o devolver o ficheiro selecionado, em forma de matriz de tamanho [421] [12];
 	 * @param excelFilePath
 	 * @return matrix
 	 * @throws IOException
@@ -291,5 +284,6 @@ public class GUI{
 
 	public static void main(String[] args) throws IOException {
 		GUI gui = new GUI();
+		gui.open();
 	}
 }
