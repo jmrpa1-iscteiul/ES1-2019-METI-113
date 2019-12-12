@@ -7,7 +7,7 @@ import javax.swing.JTable;
 import org.junit.jupiter.api.Test;
 
 class CalcularMetricasTest {
-	
+	 
 	private Regra x1 = null;
 	private Regra b1 = null;
 	private String[] columnNames = { "MethodID", "Package", "Class", "Method", "LOC", "CYCLO", "ATFD", "LAA", "is_long_method", "iPlasma", "PMD", "is_feature_envy" }; 
