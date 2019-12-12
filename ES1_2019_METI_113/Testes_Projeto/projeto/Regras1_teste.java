@@ -17,7 +17,7 @@ class Regras1_teste {
 		assertEquals(regra_is_feature_envy_1.getName_metrica1(), "ATFD");
 	
 	} 
-	@Test
+	@Test 
 	void getOperator() {
 		assertEquals(regra_long_method1.getOperator(), "&&");
 		assertEquals(regra_is_feature_envy_1.getOperator(), "||");

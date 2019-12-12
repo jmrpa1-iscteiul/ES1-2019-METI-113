@@ -32,7 +32,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class GUI{
 
 	
-	
+	 
 	private JFrame firstFrame;
 	private  CalcularMetricas calcularMetricas1;
 	private JFrame secondFrame;

@@ -20,7 +20,7 @@ class GUI_regras_test {
 		assertEquals(gui_regras.getIs_long_method(),is_long_method);
 	}
 	 
-	@Test
+	@Test 
 	public void getIs_feature_envyTest() {
 		assertEquals(gui_regras.getIs_feature_envy(),is_feature_envy);
 	}

@@ -11,7 +11,7 @@ import javax.swing.JTable;
  * @author Andreb , jmrpa1 
  * @Date   12/Dez/2019
  * version 1.0
- */
+ */ 
 
 public class CalcularMetricas {
 	
@@ -233,8 +233,19 @@ public class CalcularMetricas {
 	public int getDIIpmd() {
 		return DIIpmd;
 	}
+
+
+
+	public Regra getRegra1() {
+		return x1;
+	}
 	
-	
-	
+	public Regra getRegra2() {
+		return b1;
+	}
 	
 }
+	
+	
+	
+	
