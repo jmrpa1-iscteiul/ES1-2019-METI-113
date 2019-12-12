@@ -14,7 +14,7 @@ class GUI_regras_test {
 	Regra is_long_method = new Regra("is_long_method", "LOC", 3, "&&", "CYCLO", 6);
 	Regra is_feature_envy = new Regra("is_feature_envy", "ATFD", 5, "||", "LAA",2);
 	
-	
+	 
 	@Test
 	public void getIs_long_methodTest() {
 		assertEquals(gui_regras.getIs_long_method(),is_long_method);
