@@ -19,7 +19,7 @@ class CalcularMetricasTest {
 	public void RegraTest() { 
 		assertEquals(null, calcularmetricas.getRegra1());
 		assertEquals(null, calcularmetricas.getRegra2());
-	}
+	 }
 	
 	@Test
 	public void TableTest() {

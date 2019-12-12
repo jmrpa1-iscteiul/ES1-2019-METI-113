@@ -49,7 +49,7 @@ public class Regra {
 	public int getValue_metrica1() {
 		return value_metrica1;
 	}
-
+ 
 	/**metodo que retorna o valor da  metrica2 ( por exemplo 3)
 	 * @return 
 	 */

@@ -23,7 +23,7 @@ class GUI_regras_test {
 	@Test 
 	public void getIs_feature_envyTest() {
 		assertEquals(gui_regras.getIs_feature_envy(),is_feature_envy);
-	}
+	 }
 	
 	
 }

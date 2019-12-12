@@ -29,7 +29,7 @@ import javax.swing.text.NumberFormatter;
  *@version 1.0   
  */
 public class GUI_regras {
-
+ 
 	private JFrame frame;
 	private JPanel metricsPanel, metricsPanel2;
 	private JComboBox<String> box_operador_1, box_operador_2;

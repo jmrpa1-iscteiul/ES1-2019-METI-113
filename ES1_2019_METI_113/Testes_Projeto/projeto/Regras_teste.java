@@ -22,7 +22,7 @@ class Regras_teste {
 		assertEquals(regra_long_method1.getOperator(), "&&");
 		assertEquals(regra_is_feature_envy_1.getOperator(), "||");
 		
-	}
+	 }
 	
 	@Test
 	void getName_metrica2() {

@@ -8,7 +8,7 @@ class GUI_test {
 
 	GUI gui = new GUI();  
 	
-	@Test   
+	@Test    
 	public void GUItest() {
 		gui.open();
 		assertEquals(gui, gui);   
@@ -18,7 +18,7 @@ class GUI_test {
 	@Test
 	public void contentSecondFrameTest() { 
 		gui.contentSecondFrame(); 
-	}
+	 }
 	
 
 }
