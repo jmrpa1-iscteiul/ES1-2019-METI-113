@@ -17,4 +17,6 @@ Para iniciar corretamente a aplicação deverá seguir os seguintes passos:
 ![Alt](https://user-images.githubusercontent.com/56137733/70728962-3718df00-1cfa-11ea-96ad-79ee3a8bf641.JPG)
 >>>>>* ###### __LOC__ _(Nº de linhas do código)_
 >>>>>* ###### __Cyclo__ _(Complexidade do ciclomática do método)_
+>>>>>* ###### __ATFD__ _(Acesso do método a métodos de outras classes)_
+>>>>>* ###### __LAA__ _(Acesso do método a atributos da própria classe)_
 >>>>>* ###### __Operadores Lógicos:__ && ( _"AND"_ ) e || ( _"OR"_ ) 
