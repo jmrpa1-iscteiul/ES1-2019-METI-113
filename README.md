@@ -22,3 +22,20 @@ Para iniciar corretamente a aplicação deverá seguir os seguintes passos:
 >>>>>* ###### __Operadores Lógicos:__ && ( _"AND"_ ) e || ( _"OR"_ ) 
 * Clique na opção _"Calcular Métricas"_ para vizualizar os tipos de defeitos presentes nos métodos analisados, obtendo a seguinte interface:
 ![Alt](https://user-images.githubusercontent.com/56137733/70734378-0ccc1f00-1d04-11ea-9fa6-9fc24ed54ca2.JPG)
+* Disfrute da utilização da aplicação
+
+## Atenção:
+#### Caso encontre algum defeito ou erro que gostaria de ver corrigido, entre em contacto connosco.
+Obrigado;
+
+# ES-2019-METI-113
+### Software elaborado por:
+* _77646_ João Miguel Rocha Praia __(Scrum Master)__
+* _78108_ Diogo Filipe Bento Prata Pina __(Quality Assurance)__
+* _68952_ José Tiago Barata Pereira da Costa __(Product Owner)__
+* _73517_ André Coimbra Bandeira Ribeiro __(Developer)__
+* _77850_ Cândido Miguel Dias Calafate Lopes __(Developer)__
+* _77924_ João Filipe Marques Serrão __(Developer)__
+
+
+
