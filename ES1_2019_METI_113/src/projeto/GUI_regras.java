@@ -83,10 +83,8 @@ public class GUI_regras {
 		metricsPanel = new JPanel();
 		metricsPanel.setLayout(new GridLayout(2,8));
 
-		//metricsPanel2 = new JPanel();
-		//metricsPanel2.setLayout(new GridLayout(1,8));
 		frame.add(metricsPanel, BorderLayout.NORTH);
-		//frame.add(label2, BorderLayout.CENTER);
+		
 
 		caixa9 = new JTextField("is long method");
 		caixa9.setEditable(false);
@@ -157,7 +155,7 @@ public class GUI_regras {
 
 	}
 
-	private void getRegra() {
+	public void getRegra() {
 		is_long_method = new Regra("is_long_method", "LOC", Integer.parseInt(loc_value.getText()),
 				String.valueOf(box_operador_1.getSelectedItem()), "CYCLO",Integer.parseInt(cyclo_value.getText()));
 
