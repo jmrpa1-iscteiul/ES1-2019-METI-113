@@ -41,7 +41,7 @@ public class GUI{
 	
 	
 	private JFrame firstFrame;
-	private  CalcularMetricas calcularMetricas1;
+	private CalcularMetricas calcularMetricas1;
 	private JFrame secondFrame;
 	private String[] columnNames = { "MethodID", "Package", "Class", "Method", "LOC", "CYCLO", "ATFD", "LAA", "is_long_method", "iPlasma", "PMD", "is_feature_envy" }; 
 	private String[][] data;
@@ -64,7 +64,7 @@ public class GUI{
 	
 	/**Método responsável por criar e definir os limites da interface gráfica (500/300); 
 	 */
-	private void open() {
+	public void open() {
 		firstFrame = new JFrame();
 		firstFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		firstFrame.setLayout(new BorderLayout());
@@ -219,7 +219,7 @@ public class GUI{
 	}
 
 
-	private void contentSecondFrame() {
+	public void contentSecondFrame() {
 		secondFrame = new JFrame();
 		secondFrame.setLayout(new BorderLayout());
 		secondFrame.pack();

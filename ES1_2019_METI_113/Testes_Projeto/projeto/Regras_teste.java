@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class Regras1_teste { 
+class Regras_teste { 
 
 			
 	Regra regra_long_method1 = new Regra("is_long_method", "LOC", 3, "&&", "CYCLO", 6);	

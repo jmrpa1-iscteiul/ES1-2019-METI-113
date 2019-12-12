@@ -16,7 +16,7 @@ class CalcularMetricasTest {
 	CalcularMetricas calcularmetricas = new CalcularMetricas(x1, b1, table);
 
 	@Test
-	public void RegraTest() {
+	public void RegraTest() { 
 		assertEquals(null, calcularmetricas.getRegra1());
 		assertEquals(null, calcularmetricas.getRegra2());
 	}
